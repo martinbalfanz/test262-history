@@ -1,0 +1,5 @@
+This is a simple chart showing historical data of Test262 pass rates.
+
+Visit: https://martinbalfanz.github.io/test262-history/
+
+Data source: https://test262.fyi/
