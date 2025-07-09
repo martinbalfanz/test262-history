@@ -1,0 +1,4 @@
+[submodule "data-source"]
+	path = data-source
+	url = https://github.com/test262-fyi/data.git
+	branch = gh-pages
