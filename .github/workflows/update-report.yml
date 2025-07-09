@@ -2,7 +2,7 @@ name: Update Test262 Report
 
 on:
   schedule:
-    - cron: '0 8 * * 1'
+    - cron: '0 8 * * *'
   workflow_dispatch:
 
 jobs:

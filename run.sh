@@ -27,20 +27,19 @@ if [ -n "$LATEST_SNAPSHOT" ]; then
     echo "Comparing to latest snapshot: $LATEST_SNAPSHOT"
     if diff -qr "$SUBMODULE_DIR" "$LATEST_SNAPSHOT" --exclude=".git" >/dev/null; then
         echo "No changes in data — no snapshot created."
+    else
+        echo "Creating new snapshot at $TODAY_SNAPSHOT..."
+        mkdir -p "$TODAY_SNAPSHOT"
+        rsync -a --quiet --exclude='.git' "$SUBMODULE_DIR/" "$TODAY_SNAPSHOT/"
+
+        echo "Snapshot saved!"
     fi
 else
     echo "No previous snapshot found — creating first one."
 fi
 
-echo "Creating new snapshot at $TODAY_SNAPSHOT..."
-mkdir -p "$TODAY_SNAPSHOT"
-rsync -a --exclude='.git' "$SUBMODULE_DIR/" "$TODAY_SNAPSHOT/"
-
-echo "Snapshot saved!"
-
-source .venv/bin/activate && python app.py
-
-if [ "$OLD_HASH" != "$NEW_HASH" ] || [ -d "snapshots/$TODAY" ]; then
+if [ "$OLD_HASH" != "$NEW_HASH" ] ||  ! git ls-files --error-unmatch "$TODAY_SNAPSHOT" >/dev/null 2>&1; then
+  source .venv/bin/activate && python app.py
   git add data/ docs/ snapshots/
   git commit -m "$(date +'%Y-%m-%d') data update"
   git push
