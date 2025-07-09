@@ -26,5 +26,7 @@ jobs:
 
       - name: Run update script
         run: |
-          chmod +x run.sh
-          ./run.sh
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          chmod +x update.sh
+          ./update.sh
