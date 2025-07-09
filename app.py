@@ -8,7 +8,7 @@ import plotly.io as pio
 
 os.makedirs("data", exist_ok=True)
 
-with open("data/history.json") as f:
+with open("data-source/history.json") as f:
     raw_data = json.load(f)
 
 records = []

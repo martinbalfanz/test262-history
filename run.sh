@@ -5,13 +5,14 @@ set -e
 mkdir -p data
 mkdir -p docs
 
-HISTORY_FILE="data/history.json"
+HISTORY_FILE="data-source/history.json"
 OLD_HASH=""
 if [ -f "$HISTORY_FILE" ]; then
   OLD_HASH=$(sha256sum "$HISTORY_FILE" | cut -d ' ' -f1)
 fi
 
-wget -q -O "$HISTORY_FILE" https://raw.githubusercontent.com/test262-fyi/data/refs/heads/gh-pages/history.json
+# wget -q -O "$HISTORY_FILE" https://raw.githubusercontent.com/test262-fyi/data/refs/heads/gh-pages/history.json
+git submodule update --remote --merge
 NEW_HASH=$(sha256sum "$HISTORY_FILE" | cut -d ' ' -f1)
 
 source .venv/bin/activate && python app.py
