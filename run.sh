@@ -18,7 +18,7 @@ fi
 TODAY=$(date +%Y-%m-%d)
 TODAY_SNAPSHOT="${SNAPSHOT_DIR}/${TODAY}"
 
-git submodule update --remote --merge
+git submodule update --remote
 
 NEW_HASH=$(sha256sum "$HISTORY_FILE" | cut -d ' ' -f1)
 LATEST_SNAPSHOT=$(find "$SNAPSHOT_DIR" -type d -maxdepth 1 -mindepth 1 | sort | tail -n 1)
