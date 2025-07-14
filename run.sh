@@ -41,8 +41,8 @@ else
 fi
 
 if [ "$OLD_HASH" != "$NEW_HASH" ] ||  ! git ls-files --error-unmatch "$TODAY_SNAPSHOT" >/dev/null 2>&1; then
-  source .venv/bin/activate && python app.py
-  git add data/ docs/ snapshots/ /data-source
+  . .venv/bin/activate && python app.py
+  git add data/ docs/ snapshots/ data-source/
   git commit -m "$(date +'%Y-%m-%d') data update"
   git push
   echo "Changes committed and pushed."
